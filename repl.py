@@ -20,6 +20,7 @@ def show_help():
     print('LOAD filename.sm\n\tLoad the instructions in the specified file.\n')
     print('DEBUG\n\tTurn on debug output during execution.\n')
     print('NODEBUG\n\tTurn off debug output during execution.\n')
+    print('RESET\n\tCompletely reset the processor state, including program.\n')
     print('All stack processor instructions may be invoked as well, but')
     print('CALL/JZ/JNZ/JMP/RET instructions won\'t work unless a program')
     print('is loaded.')

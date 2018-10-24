@@ -1,0 +1,59 @@
+#=============================================================================
+# A simple program to compute how many iterations it takes to get from a
+# given input N back to 1, following the rules of the Collatz Conjecture.
+#
+# The function is invoked by pushing N onto the stack, then calling the
+# collatz function.  When the function returns, N will be removed from
+# the stack, and the number of iterations will be on top of the stack.
+#
+# Example:
+#     LIT  97
+#     CALL collatz
+# Top of stack should be 118 at return.
+#=============================================================================
+collatz:
+	# Store the count on the return-stack.
+	LIT	0
+	TO_RS
+
+collatz_loop:
+	# Is the input number 1 yet?
+	DUP
+	LIT	1
+	SUB
+	JZ	done
+
+	# Is the number even or odd?  AND with 1.
+	DUP
+	LIT	1
+	AND
+	JZ	is_even
+
+is_odd:		# Compute 3N + 1
+	DUP		# DS = [N N ...]
+	SHL		# DS = [2N N ...]
+	LIT	1	# DS = [1 2N N ...]
+	ADD		# DS = [2N+1 N ...]
+	ADD		# DS = [3N+1 ...]
+
+	JMP	end_comp
+
+is_even:	# Divide number by 2.
+	SHR
+
+end_comp:
+	# Update our iteration count.
+	FROM_RS
+	LIT	1
+	ADD
+	TO_RS
+
+	# Back to the start of the loop
+	JMP	collatz_loop
+
+done:
+	# Top of stack should be 1.  Return the iteration count.
+	DROP
+	FROM_RS
+	RET
+
