@@ -18,6 +18,7 @@ above link, but it is very close.  A number of extra instructions were
 excluded for the sake of simplicity.
 
 | Instruction	| Description	|
+| ------------- | ------------- |
 | ADD	| Pops two values off of the data stack, and pushes their sum onto the data stack. |
 | SUB	| Pops two values off of the data stack, and pushes their difference onto the data stack. |
 | AND	| Pops two values off of the data stack, and pushes their bitwise-AND onto the data stack. |
